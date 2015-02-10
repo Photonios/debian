@@ -1,0 +1,6 @@
+*.suo
+*.opensdf
+*.sdf
+*.user
+build/
+objects/
