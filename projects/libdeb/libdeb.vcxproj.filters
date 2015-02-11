@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\config.h" />
+    <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\result.h" />
+    <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\compression.h" />
+    <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\mem.h" />
+    <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\version.h" />
+    <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\file.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\source\libdeb\source\version.c" />
+    <ClCompile Include="..\..\source\libdeb\source\file.c" />
+  </ItemGroup>
+</Project>
