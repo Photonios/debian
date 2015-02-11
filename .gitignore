@@ -2,5 +2,11 @@
 *.opensdf
 *.sdf
 *.user
-build/
+build/x86/bin/*.exe
+build/x86/bin/*.exp
+build/x86/bin/*.ilk
+build/x86/bin/*.lib
+build/x86/bin/*.pdb
+build/x86/lib/
+test
 objects/
