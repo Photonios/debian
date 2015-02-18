@@ -224,6 +224,7 @@ _warc_header(struct archive_write *a, struct archive_entry *entry)
 	w->typ = archive_entry_filetype(entry);
 	w->populz = 0U;
 	if (w->typ == AE_IFREG) {
+#pragma warning(disable: 4244)
 		warc_essential_hdr_t rh = {
 			WT_RSRC,
 			/*uri*/archive_entry_pathname(entry),
@@ -234,6 +235,7 @@ _warc_header(struct archive_write *a, struct archive_entry *entry)
 			/*len*/archive_entry_size(entry),
 		};
 		ssize_t r;
+#pragma warning(default: 4244)
 
 		archive_string_init(&hdr);
 		r = _popul_ehdr(&hdr, MAX_HDR_SIZE, rh);

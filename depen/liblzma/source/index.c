@@ -352,7 +352,7 @@ index_stream_init(lzma_vli compressed_base, lzma_vli uncompressed_base,
 	s->node.left = NULL;
 	s->node.right = NULL;
 
-	s->number = stream_number;
+	s->number = (uint32_t) stream_number;
 	s->block_number_base = block_number_base;
 
 	index_tree_init(&s->groups);
@@ -885,7 +885,7 @@ index_dup_stream(const index_stream *src, const lzma_allocator *allocator)
 	// a single group. It's simplest and also tends to make
 	// lzma_index_locate() a little bit faster with very big Indexes.
 	index_group *destg = lzma_alloc(sizeof(index_group)
-			+ src->record_count * sizeof(index_record),
+			+ ((size_t) src->record_count) * sizeof(index_record),
 			allocator);
 	if (destg == NULL) {
 		index_stream_end(dest, allocator);
@@ -896,8 +896,8 @@ index_dup_stream(const index_stream *src, const lzma_allocator *allocator)
 	destg->node.uncompressed_base = 0;
 	destg->node.compressed_base = 0;
 	destg->number_base = 1;
-	destg->allocated = src->record_count;
-	destg->last = src->record_count - 1;
+	destg->allocated = (size_t) src->record_count;
+	destg->last = (size_t) src->record_count - 1;
 
 	// Go through all the groups in src and copy the Records into destg.
 	const index_group *srcg = (const index_group *)(src->groups.leftmost);

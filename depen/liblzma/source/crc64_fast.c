@@ -49,7 +49,7 @@ lzma_crc64(const uint8_t *buf, size_t size, uint64_t crc)
 			const uint32_t tmp = (crc >> 32)
 					^ *(const uint32_t *)(buf);
 #else
-			const uint32_t tmp = crc ^ *(const uint32_t *)(buf);
+			const uint32_t tmp = ((uint32_t)crc ^ *(const uint32_t *)(buf));
 #endif
 			buf += 4;
 

@@ -564,7 +564,7 @@ extern LZMA_API(lzma_bool) lzma_index_iter_locate(
  *              - LZMA_MEM_ERROR
  *              - LZMA_PROG_ERROR
  */
-extern LZMA_API(lzma_ret) lzma_index_cat(lzma_index *dest, lzma_index *src,
+extern LZMA_API(lzma_ret) lzma_index_cat(lzma_index *__restrict dest, lzma_index *__restrict src,
 		const lzma_allocator *allocator)
 		lzma_nothrow lzma_attr_warn_unused_result;
 

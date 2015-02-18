@@ -77,14 +77,16 @@ tuklib_physmem(void)
 	uint64_t ret = 0;
 
 #if defined(_WIN32) || defined(__CYGWIN__)
+#pragma warning(disable: 4013) // For IsWindowsXPOrGreater
 	if (IsWindowsXPOrGreater()) {
+#pragma warning(default: 4013)
 		// Windows 2000 and later have GlobalMemoryStatusEx() which
 		// supports reporting values greater than 4 GiB. To keep the
 		// code working also on older Windows versions, use
 		// GlobalMemoryStatusEx() conditionally.
 		HMODULE kernel32 = GetModuleHandle("kernel32.dll");
 		if (kernel32 != NULL) {
-			BOOL (WINAPI *gmse)(LPMEMORYSTATUSEX) = GetProcAddress(
+			FARPROC gmse = GetProcAddress(
 					kernel32, "GlobalMemoryStatusEx");
 			if (gmse != NULL) {
 				MEMORYSTATUSEX meminfo;

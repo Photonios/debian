@@ -38,9 +38,9 @@ lzma_filter_flags_decode(
 		return LZMA_DATA_ERROR;
 
 	const lzma_ret ret = lzma_properties_decode(
-			filter, allocator, in + *in_pos, props_size);
+			filter, allocator, in + *in_pos, (size_t) props_size);
 
-	*in_pos += props_size;
+	*in_pos += (size_t) props_size;
 
 	return ret;
 }
