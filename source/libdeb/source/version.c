@@ -91,8 +91,14 @@ DEB_VERSION deb_version_parse(const char *str)
 	uint32_t *segment = &version.major;
 
 	for(int i = 0; i < len; i++) {
-		switch(str[i]) {
-		case '.': {
+		char c = str[i];
+		if(c >= '0' && c <= '9') {
+			segment_len++;
+		} else { /* non-numbers are considered segment separators */
+			if(segment_len <= 0) {
+				continue;
+			}
+
 			uint32_t num = get_number(&str[i - segment_len], segment_len);
 
 			*segment = num;
@@ -104,9 +110,6 @@ DEB_VERSION deb_version_parse(const char *str)
 
 			count++;
 			segment_len = 0;
-		} break;
-		default:
-			segment_len++;
 		}
 	}
 

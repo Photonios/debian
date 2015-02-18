@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{fef6b830-ceb0-401e-83b5-35a85ca78cae}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\depen\zlib\include\crc32.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\zlib\include\deflate.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\zlib\include\gzguts.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\zlib\include\inffast.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\zlib\include\inffixed.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\zlib\include\inflate.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\zlib\include\inftrees.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\zlib\include\trees.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\zlib\include\zconf.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\zlib\include\zlib.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\zlib\include\zutil.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\depen\zlib\source\adler32.c" />
+    <ClCompile Include="..\..\depen\zlib\source\compress.c" />
+    <ClCompile Include="..\..\depen\zlib\source\crc32.c" />
+    <ClCompile Include="..\..\depen\zlib\source\deflate.c" />
+    <ClCompile Include="..\..\depen\zlib\source\gzclose.c" />
+    <ClCompile Include="..\..\depen\zlib\source\gzlib.c" />
+    <ClCompile Include="..\..\depen\zlib\source\gzread.c" />
+    <ClCompile Include="..\..\depen\zlib\source\gzwrite.c" />
+    <ClCompile Include="..\..\depen\zlib\source\infback.c" />
+    <ClCompile Include="..\..\depen\zlib\source\inffast.c" />
+    <ClCompile Include="..\..\depen\zlib\source\inflate.c" />
+    <ClCompile Include="..\..\depen\zlib\source\inftrees.c" />
+    <ClCompile Include="..\..\depen\zlib\source\trees.c" />
+    <ClCompile Include="..\..\depen\zlib\source\uncompr.c" />
+    <ClCompile Include="..\..\depen\zlib\source\zutil.c" />
+  </ItemGroup>
+</Project>

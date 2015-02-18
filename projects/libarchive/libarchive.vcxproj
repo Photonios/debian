@@ -41,12 +41,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)\build\$(PlatformTarget)\lib\</OutDir>
     <IntDir>$(SolutionDir)\objects\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
-    <IncludePath>$(SolutionDir)\depen\libarchive\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\depen\libarchive\include\;$(SolutionDir)\depen\zlib\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)\build\$(PlatformTarget)\lib\</OutDir>
     <IntDir>$(SolutionDir)\objects\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
-    <IncludePath>$(SolutionDir)\depen\libarchive\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\depen\libarchive\include\;$(SolutionDir)\depen\zlib\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -225,6 +225,11 @@
     <ClInclude Include="..\..\depen\libarchive\include\config.h" />
     <ClInclude Include="..\..\depen\libarchive\include\config_freebsd.h" />
     <ClInclude Include="..\..\depen\libarchive\include\filter_fork.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\zlib\zlib.vcxproj">
+      <Project>{961d11f5-10bb-402b-9915-250d2efd7ead}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

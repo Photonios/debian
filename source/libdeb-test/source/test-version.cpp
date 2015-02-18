@@ -57,6 +57,14 @@ TEST(libdeb_version_test, parse_with_letters)
 	EXPECT_EQ(parsed_version.minor, 87);
 	EXPECT_EQ(parsed_version.patch, 445);
 	EXPECT_EQ(parsed_version.build, 1);
+
+	version = "v2.1-SNAPSHOT19";
+	parsed_version = deb_version_parse(version);
+
+	EXPECT_EQ(parsed_version.major, 2);
+	EXPECT_EQ(parsed_version.minor, 1);
+	EXPECT_EQ(parsed_version.patch, 19);
+	EXPECT_EQ(parsed_version.build, 0);
 }
 
 TEST(libdeb_version_test, parse_no_numbers_just_letters)
