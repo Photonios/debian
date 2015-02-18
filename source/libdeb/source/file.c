@@ -9,6 +9,25 @@
 #include <debian/libdeb/mem.h>
 #include <debian/libdeb/version.h>
 
+/* helps translating ARCHIVE_FILTER_* macros to our internal enum
+for various types of compression */
+static const __compression_lookup__[DEB_COMPRESSION_COUNT] = {
+	DEB_COMPRESSION_NONE,		/* ARCHIVE_FILTER_NONE	0 */
+	DEB_COMPRESSION_GZIP,		/* ARCHIVE_FILTER_GZIP	1 */
+	DEB_COMPRESSION_BZIP2,		/* ARCHIVE_FILTER_BZIP2 2 */
+	DEB_COMPRESSION_INVALID,	/* ARCHIVE_FILTER_COMPRESS 3 */
+	DEB_COMPRESSION_INVALID,	/* ARCHIVE_FILTER_PROGRAM 4 */
+	DEB_COMPRESSION_LZMA,		/* ARCHIVE_FILTER_LZMA 5 */
+	DEB_COMPRESSION_XZ,			/* ARCHIVE_FILTER_XZ 6 */
+	DEB_COMPRESSION_UU,			/* ARCHIVE_FILTER_UU 7 */
+	DEB_COMPRESSION_RPM,		/* ARCHIVE_FILTER_RPM 8 */
+	DEB_COMPRESSION_LZIP,		/* ARCHIVE_FILTER_LZIP 9 */
+	DEB_COMPRESSION_LRZIP,		/* ARCHIVE_FILTER_LRZIP 10 */
+	DEB_COMPRESSION_INVALID,	/* ARCHIVE_FILTER_LZOP 11 */
+	DEB_COMPRESSION_INVALID,	/* ARCHIVE_FILTER_GRZIP 12 */
+	DEB_COMPRESSION_INVALID		/* ARCHIVE_FILTER_LZ4 13 */
+};
+
 #define DEB_AR_VERSION_FILE_NAME	"debian-binary" /* should be first entry in debian archive (*.deb) */
 #define DEB_AR_META_FILE_NAME		"control.tar"   /* contains control file and scripts */
 #define DEB_AR_DATA_FILE_NAME		"data.tar"	  /* contains files and data to extract */
@@ -18,6 +37,32 @@ static int strstartswith(const char *str, const char *substr)
 	int substr_len = strlen(substr);
 	int result = strncmp(str, substr, substr_len);
 	return result == 0 ? 1 : 0;
+}
+
+static struct archive * prepare_read_new_archive()
+{
+	struct archive *new_archive = archive_read_new();
+	if(!new_archive) {
+		return NULL;
+	}
+	
+	if(archive_read_support_format_all(new_archive) != ARCHIVE_OK) {
+		return NULL;
+	}
+
+	if(archive_read_support_compression_all(new_archive) != ARCHIVE_OK) {
+		return NULL;
+	}	
+
+	return new_archive;
+}
+
+static DEB_COMPRESSION lookup_compression(int compression)
+{
+	if(compression > (DEB_COMPRESSION_COUNT - 1) || compression < 0)
+		return DEB_COMPRESSION_INVALID;
+
+	return __compression_lookup__[compression];
 }
 
 static DEB_RESULT process_version_file(struct archive *debarchive, struct archive_entry *entry)
@@ -66,25 +111,35 @@ static DEB_RESULT process_meta_file(struct archive *debarchive, struct archive_e
 	int64_t size = archive_entry_size(entry);
 	char *buf = DEB_ALLOC(char *, size);
 
-	struct archive *controlarchive = archive_read_new();
+	struct archive *controlarchive = prepare_read_new_archive();
 	if(!controlarchive) {
 		result = DEB_RESULT_ARCHIVE_FAIL;
 		goto cleanup;
 	}
 
+	/* the meta data (control.tar.gz) is usually so small that it would
+	be a waste of effort to extract it to disk.. do everything in memory :) */
+
 	if(archive_read_data(debarchive, buf, size) != size) {
 		result = DEB_RESULT_READ_FAIL;
 		goto cleanup;
 	}
-
-	if(archive_read_open_memory(controlarchive, buf, size) != ARCHIVE_OK) {
+	
+	if(archive_read_open_memory(controlarchive, buf, size) != ARCHIVE_OK) {		
 		result = DEB_RESULT_META_ARCHIVE_CORRUPT;
 		goto cleanup;
 	}
 
-	archive_compression(controlarchive);
+	DEB_COMPRESSION compression = lookup_compression(
+		archive_compression(controlarchive)
+	);
+
+	deb_file_set_meta_compression(file, compression);
 
 cleanup:
+	if(buf != NULL) {
+		free(buf);
+	}
 
 	return result;
 }
@@ -109,21 +164,12 @@ DEB_RESULT deb_file_open(const char *filename, DEB_FILE **file)
 	int meta_archive_found = 0;
 	int data_archive_found = 0;
 
-	debarchive = archive_read_new();
+	debarchive = prepare_read_new_archive();
 	if(!debarchive) {	
 		goto cleanup;
 	}
 
 	*file = deb_file_new();
-
-	/* make sure the build of libarchive supports all formats and compressions */
-	if(archive_read_support_format_all(debarchive) != ARCHIVE_OK) {
-		goto cleanup;
-	}
-
-	if(archive_read_support_compression_all(debarchive) != ARCHIVE_OK) {
-		goto cleanup;
-	}	
 
 	/* open the deb file for reading */
 	if(archive_read_open_filename(debarchive, filename, 10240) != ARCHIVE_OK) {
