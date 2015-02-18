@@ -1,0 +1,1 @@
+- Maybe link libarchive to lz4, which provides a higher compression rate then zlib? https://code.google.com/p/lz4/ 
