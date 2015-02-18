@@ -93,6 +93,7 @@
     <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\version.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\source\libdeb\source\compression.c" />
     <ClCompile Include="..\..\source\libdeb\source\file.c" />
     <ClCompile Include="..\..\source\libdeb\source\version.c" />
   </ItemGroup>

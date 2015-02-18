@@ -11,5 +11,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\source\libdeb\source\version.c" />
     <ClCompile Include="..\..\source\libdeb\source\file.c" />
+    <ClCompile Include="..\..\source\libdeb\source\compression.c" />
   </ItemGroup>
 </Project>
