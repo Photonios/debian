@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "googletest", "projects\goog
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libdeb-test", "projects\libdeb-test\libdeb-test.vcxproj", "{BE62ABEE-53D3-43C0-AFE5-69A4287E37E6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libarchive", "projects\libarchive\libarchive.vcxproj", "{64E0572A-CD2B-4F02-9396-7FC92F16210D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -39,6 +41,10 @@ Global
 		{BE62ABEE-53D3-43C0-AFE5-69A4287E37E6}.Debug|Win32.Build.0 = Debug|Win32
 		{BE62ABEE-53D3-43C0-AFE5-69A4287E37E6}.Release|Win32.ActiveCfg = Release|Win32
 		{BE62ABEE-53D3-43C0-AFE5-69A4287E37E6}.Release|Win32.Build.0 = Release|Win32
+		{64E0572A-CD2B-4F02-9396-7FC92F16210D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{64E0572A-CD2B-4F02-9396-7FC92F16210D}.Debug|Win32.Build.0 = Debug|Win32
+		{64E0572A-CD2B-4F02-9396-7FC92F16210D}.Release|Win32.ActiveCfg = Release|Win32
+		{64E0572A-CD2B-4F02-9396-7FC92F16210D}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -76,6 +76,9 @@
     <ProjectReference Include="..\googletest\googletest.vcxproj">
       <Project>{92e18812-aed2-4879-aecd-0eae162a76b7}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\libarchive\libarchive.vcxproj">
+      <Project>{64e0572a-cd2b-4f02-9396-7fc92f16210d}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\libdeb\libdeb.vcxproj">
       <Project>{f47d66ff-21c4-44d5-b0c0-6aabd00344d6}</Project>
     </ProjectReference>

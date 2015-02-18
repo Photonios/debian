@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\depen\libarchive\source\archive_acl.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_check_magic.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_cmdline.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_cryptor.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_digest.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_entry.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_entry_copy_bhfi.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_entry_copy_stat.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_entry_link_resolver.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_entry_sparse.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_entry_stat.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_entry_strmode.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_entry_xattr.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_getdate.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_hmac.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_match.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_options.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_pack_dev.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_pathmatch.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_ppmd7.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_random.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_rb.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_add_passphrase.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_append_filter.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_data_into_fd.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_disk_entry_from_file.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_disk_posix.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_disk_set_standard_lookup.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_disk_windows.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_extract.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_extract2.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_open_fd.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_open_file.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_open_filename.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_open_memory.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_set_format.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_set_options.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_filter_all.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_filter_bzip2.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_filter_compress.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_filter_grzip.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_filter_gzip.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_filter_lrzip.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_filter_lz4.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_filter_lzop.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_filter_none.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_filter_program.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_filter_rpm.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_filter_uu.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_filter_xz.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_format_7zip.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_format_all.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_format_ar.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_format_by_code.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_format_cab.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_format_cpio.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_format_empty.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_format_iso9660.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_format_lha.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_format_mtree.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_format_rar.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_format_raw.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_format_tar.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_format_warc.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_format_xar.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_read_support_format_zip.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_string.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_string_sprintf.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_util.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_virtual.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_windows.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_add_filter.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_add_filter_b64encode.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_add_filter_by_name.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_add_filter_bzip2.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_add_filter_compress.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_add_filter_grzip.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_add_filter_gzip.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_add_filter_lrzip.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_add_filter_lz4.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_add_filter_lzop.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_add_filter_none.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_add_filter_program.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_add_filter_uuencode.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_add_filter_xz.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_disk_acl.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_disk_posix.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_disk_set_standard_lookup.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_disk_windows.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_open_fd.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_open_file.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_open_filename.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_open_memory.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_set_format.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_set_format_7zip.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_set_format_ar.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_set_format_by_name.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_set_format_cpio.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_set_format_cpio_newc.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_set_format_gnutar.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_set_format_iso9660.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_set_format_mtree.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_set_format_pax.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_set_format_raw.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_set_format_shar.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_set_format_ustar.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_set_format_v7tar.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_set_format_warc.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_set_format_xar.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_set_format_zip.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_set_options.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\archive_write_set_passphrase.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\filter_fork_posix.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\filter_fork_windows.c" />
+    <ClCompile Include="..\..\depen\libarchive\source\xxhash.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{4f3e776c-ee17-415a-8578-20a7380efd28}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\depen\libarchive\include\archive.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_acl_private.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_cmdline_private.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_crc32.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_cryptor_private.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_digest_private.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_endian.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_entry.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_entry_locale.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_entry_private.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_hmac_private.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_options_private.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_pack_dev.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_pathmatch.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_platform.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_ppmd_private.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_ppmd7_private.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_private.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_random_private.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_rb.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_read_disk_private.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_read_private.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_string.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_string_composition.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_windows.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_write_disk_private.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_write_private.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\archive_xxhash.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\config_freebsd.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\filter_fork.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\depen\libarchive\include\config.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -84,6 +84,11 @@
   <ItemGroup>
     <ProjectReference Include="..\libdeb\libdeb.vcxproj">
       <Project>{f47d66ff-21c4-44d5-b0c0-6aabd00344d6}</Project>
+      <Private>false</Private>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
