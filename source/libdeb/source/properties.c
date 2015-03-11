@@ -21,6 +21,12 @@ deb_properties_parse(char *str)
 
     for(int index = 0; index < str_len; index++) {
         char token = str[index];
+        char next_token = '\0';
+
+        int is_end = (str_len - 1) == index;
+        if(!is_end) {
+            next_token = str[index + 1];
+        }
 
         if(token == ':' && lookin_for_propname) {
             /* read back and copy the name, null terminating it
@@ -30,7 +36,7 @@ deb_properties_parse(char *str)
             prop_name[propname_len] = '\0';                    
             
             /* if the property name is followed by a space; ignore it */
-            if(str[index + 1] == ' ') {
+            if(next_token == ' ') {
                 index++;
             }
           
@@ -40,11 +46,11 @@ deb_properties_parse(char *str)
             /* skip increment of counters */
             continue;
 
-        /* if new line starts with a space, we are dealing with a multi-line
-        value, continue reading... If the new line does not start with a space
+        /* if new line starts with a space or tab, we are dealing with a multi-line
+        value, continue reading... If the new line does not start with a space or tab
         or we've hit the end of the file, then we've reached the end of this
         property's value */
-        } else if(((token == '\n' && str[index + 1] != ' ') || (str_len - 1) == index) 
+        } else if(((token == '\n' && next_token != ' ' && next_token != '\t') || is_end) 
             && !lookin_for_propname) {
 
             /* read back and copy the value, null terminating it to make
