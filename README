@@ -16,9 +16,33 @@ Work in progress
 
 Dependencies
 ---------------------------------------------------------
-- libarchive
-- liblzma
-- zlib
-- glib
-- google-test
+These dependencies are currently included:
 
+    - libarchive
+    - liblzma
+    - zlib
+    - glib
+    - google-test
+    
+Building
+---------------------------------------------------------
+    Provided you have Visual Studio 2013 everything should build out-of-the-box by just opening
+    the Visual Studio solution file.
+    
+Architecture
+---------------------------------------------------------
+    The whole thing (for now) has been split into two
+    libraries:
+    
+        - libdeb
+        - libdpkg
+        
+    The first one will contain functionality for reading
+    from and to *.deb archives. This way it can be
+    re-used in other applications and/or utilitlies.
+    
+    The second one will contain everything that dpkg
+    does, from installing, upgrading, removing. This
+    way the actual dpkg program will stay really small
+    and will do nothing more than just parsing command
+    line arguments and invoking libdpkg.
