@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-#define DEB_ALLOC(type, num) (##type) calloc(1, num)
+#define DEB_ALLOC(type, num) (##type) calloc(1, (size_t) num)
 
 #ifdef __cplusplus
 }
