@@ -5,6 +5,7 @@
 #include <debian/libdeb/compression.h>
 #include <debian/libdeb/archformat.h>
 #include <debian/libdeb/result.h>
+#include <debian/libdeb/properties.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -15,6 +16,7 @@ typedef struct {
 	DEB_COMPRESSION meta_compression;
     DEB_ARCHFORMAT  data_archformat;
     DEB_ARCHFORMAT  meta_archformat;
+    DEB_PROPERTIES *properties;
 } DEB_FILE;
 
 LIBDEB_EXPORT DEB_FILE *		deb_file_new();

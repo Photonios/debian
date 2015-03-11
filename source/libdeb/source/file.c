@@ -134,9 +134,13 @@ parse_control_file(struct archive *controlarchive, struct archive_entry *entry, 
 
     buf[size] = '\0';
 
-    deb_property_list_parse(buf);
+    DEB_PROPERTIES *properties = deb_properties_parse(buf);
+    if(!properties) {
+        result = DEB_RESULT_CONTROL_FILE_PARSE_FAIL;
+        goto cleanup;
+    }
 
-    printf("%s\n", buf);
+    file->properties = properties;
 
 cleanup:
     if(buf) {

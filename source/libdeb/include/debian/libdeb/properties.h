@@ -11,7 +11,11 @@ extern "C" {
 struct _GHashTable;
 typedef struct _GHashTable GHashTable;
 
-LIBDEB_EXPORT GHashTable *   deb_property_list_parse(char *str);
+/* in case we ever want to get rid of glib */
+typedef GHashTable DEB_PROPERTIES;
+
+LIBDEB_EXPORT DEB_PROPERTIES *   deb_properties_parse(char *str);
+LIBDEB_EXPORT void               deb_properties_print(DEB_PROPERTIES *properties);
 
 #ifdef __cplusplus
 }

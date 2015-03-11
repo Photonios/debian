@@ -5,10 +5,10 @@
 #include <debian/libdeb/mem.h>
 #include <debian/libdeb/properties.h>
 
-GHashTable *
-deb_property_list_parse(char *str)
+DEB_PROPERTIES *
+deb_properties_parse(char *str)
 {
-    GHashTable *properties = g_hash_table_new(g_int_hash, g_int_equal);
+    DEB_PROPERTIES *properties = g_hash_table_new(g_int_hash, g_int_equal);
     int str_len = strlen(str);
 
     int propname_len = 0;
@@ -84,3 +84,18 @@ deb_property_list_parse(char *str)
     return properties;
 }
 
+static void
+print_property(char *name, char *value, gpointer user_data)
+{
+    printf("%s: %s\n", name, value);
+}
+
+void
+deb_properties_print(DEB_PROPERTIES *properties)
+{
+    if(!properties) {
+        return;
+    }
+
+    g_hash_table_foreach(properties, print_property, NULL);
+}
