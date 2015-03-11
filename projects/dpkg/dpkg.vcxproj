@@ -43,14 +43,14 @@
     <IntDir>$(SolutionDir)\objects\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
     <IncludePath>$(SolutionDir)\source\dpkg\include\;$(SolutionDir)\source\libdpkg\include\;$(SolutionDir)\source\libdeb\include\;$(IncludePath)</IncludePath>
     <SourcePath>$(SolutionDir)\source\dpkg\source\;$(SourcePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)\depen\libarchive\lib\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)\depen\libarchive\lib\;$(SolutionDir)\depen\glib\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)\build\$(PlatformTarget)\bin\</OutDir>
     <IntDir>$(SolutionDir)\objects\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
     <IncludePath>$(SolutionDir)\source\dpkg\include\;$(SolutionDir)\source\libdpkg\include\;$(SolutionDir)\source\libdeb\include\;$(IncludePath)</IncludePath>
     <SourcePath>$(SolutionDir)\source\dpkg\source\;$(SourcePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)\depen\libarchive\lib\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)\depen\libarchive\lib\;$(SolutionDir)\depen\glib\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -60,7 +60,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Ntdll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Ntdll.lib;gio-2.0.lib;glib-2.0.lib;gmodule-2.0.lib;gobject-2.0.lib;gthread-2.0.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -75,7 +75,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>Ntdll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Ntdll.lib;gio-2.0.lib;glib-2.0.lib;gmodule-2.0.lib;gobject-2.0.lib;gthread-2.0.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -7,10 +7,14 @@
     <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\mem.h" />
     <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\version.h" />
     <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\file.h" />
+    <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\archformat.h" />
+    <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\properties.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\libdeb\source\version.c" />
     <ClCompile Include="..\..\source\libdeb\source\file.c" />
     <ClCompile Include="..\..\source\libdeb\source\compression.c" />
+    <ClCompile Include="..\..\source\libdeb\source\archformat.c" />
+    <ClCompile Include="..\..\source\libdeb\source\properties.c" />
   </ItemGroup>
 </Project>

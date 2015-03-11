@@ -8,6 +8,7 @@
 #include <debian/libdeb/file.h>
 #include <debian/libdeb/mem.h>
 #include <debian/libdeb/version.h>
+#include <debian/libdeb/properties.h>
 
 /* helps translating ARCHIVE_FILTER_* macros to our internal enum
 for various types of compression */
@@ -30,16 +31,20 @@ static const __compression_lookup__[DEB_COMPRESSION_COUNT] = {
 
 #define DEB_AR_VERSION_FILE_NAME	"debian-binary" /* should be first entry in debian archive (*.deb) */
 #define DEB_AR_META_FILE_NAME		"control.tar"   /* contains control file and scripts */
-#define DEB_AR_DATA_FILE_NAME		"data.tar"	  /* contains files and data to extract */
+#define DEB_AR_DATA_FILE_NAME		"data.tar"	    /* contains files and data to extract */
 
-static int strstartswith(const char *str, const char *substr)
+#define DEB_CONTROL_FILE_NAME       "control"
+
+static int
+strstartswith(const char *str, const char *substr)
 {
 	int substr_len = strlen(substr);
 	int result = strncmp(str, substr, substr_len);
 	return result == 0 ? 1 : 0;
 }
 
-static struct archive * prepare_read_new_archive()
+static struct archive *
+prepare_read_new_archive()
 {
 	struct archive *new_archive = archive_read_new();
 	if(!new_archive) {
@@ -57,7 +62,8 @@ static struct archive * prepare_read_new_archive()
 	return new_archive;
 }
 
-static DEB_COMPRESSION lookup_compression(int compression)
+static DEB_COMPRESSION
+lookup_compression(int compression)
 {
 	if(compression > (DEB_COMPRESSION_COUNT - 1) || compression < 0)
 		return DEB_COMPRESSION_INVALID;
@@ -65,7 +71,16 @@ static DEB_COMPRESSION lookup_compression(int compression)
 	return __compression_lookup__[compression];
 }
 
-static DEB_RESULT process_version_file(struct archive *debarchive, struct archive_entry *entry)
+static DEB_ARCHFORMAT
+lookup_archformat(int archformat)
+{
+    /* ugly, but works, probably need to create a proper lookup
+    table for this in the future*/
+    return (DEB_ARCHFORMAT) archformat;
+}
+
+static DEB_RESULT
+process_version_file(struct archive *debarchive, struct archive_entry *entry)
 {
 	if(!debarchive || !entry)
 		return DEB_RESULT_NULL_PARAM;
@@ -76,7 +91,7 @@ static DEB_RESULT process_version_file(struct archive *debarchive, struct archiv
 	if(!buf)
 		return DEB_RESULT_NO_MEM;
 
-	if(archive_read_data(debarchive, buf, size) != size) {
+	if(archive_read_data(debarchive, buf, (size_t) size) != size) {
 		free(buf);
 		return DEB_RESULT_READ_FAIL;
 	}
@@ -97,15 +112,67 @@ static DEB_RESULT process_version_file(struct archive *debarchive, struct archiv
 		return DEB_RESULT_INVALID_VERSION;
 	}
 
-	free(buf);
+    if(buf) {
+	    free(buf);
+    }
+
 	return DEB_RESULT_OK;
 }
 
-static DEB_RESULT process_meta_file(struct archive *debarchive, struct archive_entry *entry, DEB_FILE *file)
+static DEB_RESULT
+parse_control_file(struct archive *controlarchive, struct archive_entry *entry, DEB_FILE *file)
+{
+    DEB_RESULT result = DEB_RESULT_OK;
+
+    int64_t size = archive_entry_size(entry);
+	char *buf = DEB_ALLOC(char *, size + 1); /* +1 for null terminator */
+
+    if(archive_read_data(controlarchive, buf, (size_t) size) != size) {
+		result = DEB_RESULT_CONTROL_FILE_READ_FAIL;
+		goto cleanup;
+	}
+
+    buf[size] = '\0';
+
+    deb_property_list_parse(buf);
+
+    printf("%s\n", buf);
+
+cleanup:
+    if(buf) {
+        free(buf);
+    }
+
+    return result;
+}
+
+static DEB_RESULT
+process_meta_file_contents(struct archive *controlarchive, DEB_FILE *file)
+{
+    struct archive_entry *entry = NULL;
+    int control_file_found = 0;
+
+    while(archive_read_next_header(controlarchive, &entry) == ARCHIVE_OK) {
+        /* +2 because all file names start with './' */
+		const char *filename = archive_entry_pathname(entry) + 2;
+
+        if(strstartswith(filename, DEB_CONTROL_FILE_NAME)) {
+            parse_control_file(controlarchive, entry, file);
+            control_file_found = 1;            
+        } else {
+
+        }
+    }
+
+    return DEB_RESULT_OK;
+}
+
+static DEB_RESULT
+process_meta_file(struct archive *debarchive, struct archive_entry *entry, DEB_FILE *file)
 {
 	if(!debarchive || !entry || !file)
 		return DEB_RESULT_NULL_PARAM;
-
+    
 	DEB_RESULT result = DEB_RESULT_OK;
 
 	int64_t size = archive_entry_size(entry);
@@ -120,12 +187,12 @@ static DEB_RESULT process_meta_file(struct archive *debarchive, struct archive_e
 	/* the meta data (control.tar.gz) is usually so small that it would
 	be a waste of effort to extract it to disk.. do everything in memory :) */
 
-	if(archive_read_data(debarchive, buf, size) != size) {
+	if(archive_read_data(debarchive, buf, (size_t) size) != size) {
 		result = DEB_RESULT_READ_FAIL;
 		goto cleanup;
 	}
 	
-	if(archive_read_open_memory(controlarchive, buf, size) != ARCHIVE_OK) {		
+	if(archive_read_open_memory(controlarchive, buf, (size_t) size) != ARCHIVE_OK) {		
 		result = DEB_RESULT_META_ARCHIVE_CORRUPT;
 		goto cleanup;
 	}
@@ -136,15 +203,39 @@ static DEB_RESULT process_meta_file(struct archive *debarchive, struct archive_e
 
 	deb_file_set_meta_compression(file, compression);
 
+    DEB_ARCHFORMAT archformat = lookup_archformat(
+        archive_format(controlarchive)
+    );
+
+    /* because we're reading from memory, libarchive
+    will almost always set the archive format to 0,
+    default to TAR */
+    if(archformat == DEB_ARCHFORMAT_INVALID) {
+        archformat = DEB_ARCHFORMAT_TAR;
+    }
+
+    deb_file_set_meta_archformat(file, archformat);
+
+    /* extract control file and scripts */
+    result = process_meta_file_contents(controlarchive, file);
+    if(deb_result_is_bad(result)) {
+        goto cleanup;
+    }
+
 cleanup:
-	if(buf != NULL) {
-		free(buf);
+    if(controlarchive) {
+        archive_read_close(controlarchive);
+    }
+
+	if(buf) {
+		free(buf);        
 	}
 
 	return result;
 }
 
-DEB_FILE * deb_file_new()
+DEB_FILE *
+deb_file_new()
 {
 	DEB_FILE *new_file = DEB_ALLOC(DEB_FILE *, sizeof(DEB_FILE));
 	if(!new_file)
@@ -156,7 +247,8 @@ DEB_FILE * deb_file_new()
 	return new_file;
 }
 
-DEB_RESULT deb_file_open(const char *filename, DEB_FILE **file)
+DEB_RESULT
+deb_file_open(const char *filename, DEB_FILE **file)
 {
 	struct archive *debarchive = NULL;
 	struct archive_entry *entry = NULL;
@@ -205,13 +297,14 @@ DEB_RESULT deb_file_open(const char *filename, DEB_FILE **file)
 
 cleanup:
 	if(debarchive) {
-		archive_read_finish(debarchive);
+		archive_read_close(debarchive);
 	}
 
 	return DEB_RESULT_OK;
 }
 
-DEB_RESULT deb_file_set_data_compression(DEB_FILE *file, DEB_COMPRESSION compression)
+DEB_RESULT
+deb_file_set_data_compression(DEB_FILE *file, DEB_COMPRESSION compression)
 {
 	if(!file)
 		return DEB_RESULT_NULL_PARAM;
@@ -220,7 +313,8 @@ DEB_RESULT deb_file_set_data_compression(DEB_FILE *file, DEB_COMPRESSION compres
 	return DEB_RESULT_OK;
 }
 
-DEB_COMPRESSION deb_file_get_data_compression(DEB_FILE *file)
+DEB_COMPRESSION
+deb_file_get_data_compression(DEB_FILE *file)
 {
 	if(!file)
 		return DEB_COMPRESSION_INVALID;
@@ -228,7 +322,8 @@ DEB_COMPRESSION deb_file_get_data_compression(DEB_FILE *file)
 	return file->data_compression;
 }
 
-DEB_RESULT deb_file_set_meta_compression(DEB_FILE *file, DEB_COMPRESSION compression)
+DEB_RESULT
+deb_file_set_meta_compression(DEB_FILE *file, DEB_COMPRESSION compression)
 {
 	if(!file)
 		return DEB_RESULT_NULL_PARAM;
@@ -237,10 +332,49 @@ DEB_RESULT deb_file_set_meta_compression(DEB_FILE *file, DEB_COMPRESSION compres
 	return DEB_RESULT_OK;
 }
 
-DEB_COMPRESSION deb_file_get_meta_compression(DEB_FILE *file)
+DEB_COMPRESSION
+deb_file_get_meta_compression(DEB_FILE *file)
 {
 	if(!file)
 		return DEB_COMPRESSION_INVALID;
 
 	return file->meta_compression;
+}
+
+DEB_RESULT
+deb_file_set_data_archformat(DEB_FILE *file, DEB_ARCHFORMAT format)
+{
+    if(!file)
+        return DEB_RESULT_NULL_PARAM;
+
+    file->data_archformat = format;
+    return DEB_RESULT_OK;
+}
+
+DEB_ARCHFORMAT
+deb_file_get_data_archformat(DEB_FILE *file)
+{
+    if(!file)
+        return DEB_ARCHFORMAT_INVALID;
+
+    return file->data_archformat;
+}
+
+DEB_RESULT
+deb_file_set_meta_archformat(DEB_FILE *file, DEB_ARCHFORMAT format)
+{
+    if(!file)
+        return DEB_RESULT_NULL_PARAM;
+
+    file->meta_archformat = format;
+    return DEB_RESULT_OK;
+}
+
+DEB_ARCHFORMAT
+deb_file_get_meta_archformat(DEB_FILE *file)
+{
+    if(!file)
+        return DEB_ARCHFORMAT_INVALID;
+
+    return file->meta_archformat;
 }

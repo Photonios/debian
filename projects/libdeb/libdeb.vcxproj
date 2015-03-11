@@ -41,16 +41,16 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)\build\$(PlatformTarget)\lib\</OutDir>
     <IntDir>$(SolutionDir)\objects\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
-    <IncludePath>$(SolutionDir)\source\libdeb\include\;$(SolutionDir)\depen\libarchive\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\source\libdeb\include\;$(SolutionDir)\depen\libarchive\include\;$(SolutionDir)\depen\glib\include\glib-2.0;$(IncludePath)</IncludePath>
     <SourcePath>$(SolutionDir)\source\libdeb\source\;$(SourcePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)\depen\libarchive\lib\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)\depen\libarchive\lib\;$(SolutionDir)\depen\glib\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)\build\$(PlatformTarget)\lib\</OutDir>
     <IntDir>$(SolutionDir)\objects\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
-    <IncludePath>$(SolutionDir)\source\libdeb\include\;$(SolutionDir)\depen\libarchive\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\source\libdeb\include\;$(SolutionDir)\depen\libarchive\include\;$(SolutionDir)\depen\glib\include\glib-2.0;$(IncludePath)</IncludePath>
     <SourcePath>$(SolutionDir)\source\libdeb\source\;$(SourcePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)\depen\libarchive\lib\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)\depen\libarchive\lib\;$(SolutionDir)\depen\glib\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -63,7 +63,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gio-2.0.lib;glib-2.0.lib;gmodule-2.0.lib;gobject-2.0.lib;gthread-2.0.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -81,20 +81,24 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gio-2.0.lib;glib-2.0.lib;gmodule-2.0.lib;gobject-2.0.lib;gthread-2.0.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\archformat.h" />
     <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\compression.h" />
     <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\config.h" />
     <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\file.h" />
     <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\mem.h" />
+    <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\properties.h" />
     <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\result.h" />
     <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\version.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\source\libdeb\source\archformat.c" />
     <ClCompile Include="..\..\source\libdeb\source\compression.c" />
     <ClCompile Include="..\..\source\libdeb\source\file.c" />
+    <ClCompile Include="..\..\source\libdeb\source\properties.c" />
     <ClCompile Include="..\..\source\libdeb\source\version.c" />
   </ItemGroup>
   <ItemGroup>
