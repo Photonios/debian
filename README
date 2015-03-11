@@ -1,0 +1,11 @@
+Goal: create a well-written, stable and working clone of dpkg/apt-get for Windows.
+
+This is very much a work in progress. Nothing is working yet. What I've done so far:
+
+- Implemented parsing version numbers
+- Implemented reading a *.deb file
+    - Implemented detecting the compression type (for both the `control.tar.gz` and `data` archive)
+    - Implemented detecting the archive format (for both the `control.tar.gz` and `data` archive)
+    - Implemented opening the `control` archive
+    - Implemented reading and parsing the `control` file from the `control.tar.gz` archive
+- Added unit tests for parsing version numbers
