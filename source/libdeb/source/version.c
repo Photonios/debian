@@ -4,7 +4,8 @@
 
 #include <debian/libdeb/version.h>
 
-static uint32_t get_number(const char *str, int len)
+static uint32_t
+get_number(const char *str, int len)
 {
 	uint32_t result = 0;
 	
@@ -42,7 +43,8 @@ static uint32_t get_number(const char *str, int len)
 	return result;
 }
 
-static int make_comparison(uint32_t a, uint32_t b, DEB_VERSION_OPERATOR oper) 
+static int
+make_comparison(uint32_t a, uint32_t b, DEB_VERSION_OPERATOR oper) 
 {
 	int result = 0;
 	switch(oper) {
@@ -66,19 +68,22 @@ static int make_comparison(uint32_t a, uint32_t b, DEB_VERSION_OPERATOR oper)
 	return result;
 }
 
-DEB_VERSION deb_version_new()
+DEB_VERSION
+deb_version_new()
 {
 	DEB_VERSION version = { 0 };
 	return version;
 }
 
-DEB_VERSION deb_version_create(uint32_t major, uint32_t minor, uint32_t patch, uint32_t build)
+DEB_VERSION
+deb_version_create(uint32_t major, uint32_t minor, uint32_t patch, uint32_t build)
 {
 	DEB_VERSION version = { major, minor, patch, build };
 	return version;
 }
 
-DEB_VERSION deb_version_parse(const char *str)
+DEB_VERSION
+deb_version_parse(const char *str)
 {
 	if(!str)
 		return deb_version_new();
@@ -121,7 +126,8 @@ DEB_VERSION deb_version_parse(const char *str)
 	return version;
 }
 
-int deb_version_compare(DEB_VERSION version_a, DEB_VERSION version_b, DEB_VERSION_OPERATOR oper)
+int
+deb_version_compare(DEB_VERSION version_a, DEB_VERSION version_b, DEB_VERSION_OPERATOR oper)
 {
 	uint32_t *segment_a = &version_a.major;
 	uint32_t *segment_b = &version_b.major;
@@ -138,7 +144,8 @@ int deb_version_compare(DEB_VERSION version_a, DEB_VERSION version_b, DEB_VERSIO
 	return 1;
 }
 
-int deb_version_is_equal(DEB_VERSION version_a, DEB_VERSION version_b)
+int
+deb_version_is_equal(DEB_VERSION version_a, DEB_VERSION version_b)
 {
 	return deb_version_compare(version_a, version_b, DEB_VERSION_EQUAL);
 }

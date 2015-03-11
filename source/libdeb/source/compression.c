@@ -13,7 +13,8 @@ static const char * __compression_name_lookup__[DEB_COMPRESSION_COUNT] = {
 	"lrz"		/* DEB_COMPRESSION_LRZIP */
 };
 
-const char * deb_compression_get_name(DEB_COMPRESSION compression)
+const char *
+deb_compression_get_name(DEB_COMPRESSION compression)
 {
 	return __compression_name_lookup__[compression];
 }

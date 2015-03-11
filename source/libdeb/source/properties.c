@@ -5,7 +5,8 @@
 #include <debian/libdeb/mem.h>
 #include <debian/libdeb/properties.h>
 
-GHashTable * deb_property_list_parse(char *str)
+GHashTable *
+deb_property_list_parse(char *str)
 {
     GHashTable *properties = g_hash_table_new(g_int_hash, g_int_equal);
     int str_len = strlen(str);

@@ -1,6 +1,7 @@
 #include <debian/libdeb/archformat.h>
 
-const char * deb_archformat_get_name(DEB_ARCHFORMAT format)
+const char *
+deb_archformat_get_name(DEB_ARCHFORMAT format)
 {
     switch(format) {
     case DEB_ARCHFORMAT_BASE_MASK:
