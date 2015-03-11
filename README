@@ -1,18 +1,23 @@
 Goal
 ---------------------------------------------------------
-    Create a well-written, stable and working clone of dpkg/apt-get for Windows.
+    Create a well-written, stable and working clone of
+    dpkg/apt-get for Windows.
     
 Work in progress
 ---------------------------------------------------------
-    This is very much a work in progress. Nothing is working yet. What I've done so far:
+    This is very much a work in progress. Nothing is
+    working yet. What I've done so far:
     
-    - Implemented parsing version numbers
-    - Implemented reading a *.deb file
-        - Implemented detecting the compression type for archives
-        - Implemented detecting the archive format for archives
-        - Implemented opening the `control` archive
-        - Implemented reading and parsing the `control` file
-    - Added unit tests for parsing version numbers
+    - Implemented parsing version numbers.
+    - Implemented reading a *.deb file.
+        - Implemented detecting the compression type
+          for archives.
+        - Implemented detecting the archive format for
+          archives.
+        - Implemented opening the `control` archive.
+        - Implemented reading and parsing the `control`
+          file.
+    - Added unit tests for parsing version numbers.
 
 Dependencies
 ---------------------------------------------------------
