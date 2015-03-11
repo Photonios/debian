@@ -22,13 +22,23 @@ deb_properties_parse(char *str)
     for(int index = 0; index < str_len; index++) {
         char token = str[index];
         char next_token = '\0';
+        char previous_token = '\0';
 
         int is_end = (str_len - 1) == index;
+        int is_start = index == 0;
+
         if(!is_end) {
             next_token = str[index + 1];
         }
 
-        if(token == ':' && lookin_for_propname) {
+        if(!is_start) {
+            previous_token = str[index - 1];
+        }
+
+        if(token == '#' && previous_token == '\n') {
+            /* ignore commented lines */
+
+        } else if(token == ':' && lookin_for_propname) {
             /* read back and copy the name, null terminating it
             to make it a valid string */
             prop_name = DEB_ALLOC(char *, propname_len + 1);
