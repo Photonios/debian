@@ -26,8 +26,9 @@ These dependencies are currently included:
     
 Building
 ---------------------------------------------------------
-    Provided you have Visual Studio 2013 everything should build out-of-the-box by just opening
-    the Visual Studio solution file.
+    Provided you have Visual Studio 2013 everything
+    should build out-of-the-box by just opening the
+    Visual Studio solution file.
     
 Architecture
 ---------------------------------------------------------
