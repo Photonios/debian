@@ -92,6 +92,7 @@
     <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\mem.h" />
     <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\properties.h" />
     <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\result.h" />
+    <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\util.h" />
     <ClInclude Include="..\..\source\libdeb\include\debian\libdeb\version.h" />
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +100,7 @@
     <ClCompile Include="..\..\source\libdeb\source\compression.c" />
     <ClCompile Include="..\..\source\libdeb\source\file.c" />
     <ClCompile Include="..\..\source\libdeb\source\properties.c" />
+    <ClCompile Include="..\..\source\libdeb\source\util.c" />
     <ClCompile Include="..\..\source\libdeb\source\version.c" />
   </ItemGroup>
   <ItemGroup>

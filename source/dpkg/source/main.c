@@ -13,13 +13,17 @@ int main(int argc, char **argv)
     const char *data_compression = deb_compression_get_name(file->data_compression);
     const char *data_archformat = deb_archformat_get_name(file->data_archformat);
 
+    char *pkg_name = deb_properties_get(file->properties, DEB_PROPERTY_PACKAGE);
+    char *pkg_version = deb_properties_get(file->properties, DEB_PROPERTY_VERSION);
+
+    printf("Package name: %s\n", pkg_name);
+    printf("Package version: %s\n", pkg_version);
+
     printf("Data compression: %s\n", data_compression);
     printf("Data archive format: %s\n", data_archformat);
 
     printf("Meta-data compression: %s\n", meta_compression);
     printf("Meta-data archive format: %s\n", meta_archformat);
-
-    deb_properties_print(file->properties);
 
 	return 0;
 }

@@ -7,6 +7,7 @@
 
 #include <debian/libdeb/file.h>
 #include <debian/libdeb/mem.h>
+#include <debian/libdeb/util.h>
 #include <debian/libdeb/version.h>
 #include <debian/libdeb/properties.h>
 
@@ -34,14 +35,6 @@ static const __compression_lookup__[DEB_COMPRESSION_COUNT] = {
 #define DEB_AR_DATA_FILE_NAME		"data.tar"	    /* contains files and data to extract */
 
 #define DEB_CONTROL_FILE_NAME       "control"
-
-static int
-strstartswith(const char *str, const char *substr)
-{
-	int substr_len = strlen(substr);
-	int result = strncmp(str, substr, substr_len);
-	return result == 0 ? 1 : 0;
-}
 
 static struct archive *
 prepare_read_new_archive()

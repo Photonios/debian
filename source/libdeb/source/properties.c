@@ -3,7 +3,11 @@
 #include <string.h>
 
 #include <debian/libdeb/mem.h>
+#include <debian/libdeb/util.h>
 #include <debian/libdeb/properties.h>
+
+/* Read: https://www.debian.org/doc/debian-policy/ch-controlfields.html
+For more information on the format and rules related to control files. */
 
 DEB_PROPERTIES *
 deb_properties_parse(char *str)
@@ -22,7 +26,7 @@ deb_properties_parse(char *str)
     for(int index = 0; index < str_len; index++) {
         char token = str[index];
         char next_token = '\0';
-        char previous_token = '\0';
+        char prev_token = '\0';
 
         int is_end = (str_len - 1) == index;
         int is_start = index == 0;
@@ -32,18 +36,24 @@ deb_properties_parse(char *str)
         }
 
         if(!is_start) {
-            previous_token = str[index - 1];
+            prev_token = str[index - 1];
         }
 
-        if(token == '#' && previous_token == '\n') {
+        if(token == '#' && prev_token == '\n') {
             /* ignore commented lines */
+
+        } else if(token == ' ' && lookin_for_propname) {
+            /* error, property names may not contain spaces */
 
         } else if(token == ':' && lookin_for_propname) {
             /* read back and copy the name, null terminating it
             to make it a valid string */
             prop_name = DEB_ALLOC(char *, propname_len + 1);
             memcpy(prop_name, str + (index - propname_len), propname_len);
-            prop_name[propname_len] = '\0';                    
+            prop_name[propname_len] = '\0';
+
+            /* make lower case, we are case insensitive */
+            strtolower(prop_name);
             
             /* if the property name is followed by a space; ignore it */
             if(next_token == ' ') {
@@ -114,4 +124,11 @@ deb_properties_print(DEB_PROPERTIES *properties)
     }
 
     g_hash_table_foreach(properties, print_property, NULL);
+}
+
+char *
+deb_properties_get(DEB_PROPERTIES *properties, const char *name)
+{
+    char *value = (char *) g_hash_table_lookup(properties, name);
+    return value;
 }
