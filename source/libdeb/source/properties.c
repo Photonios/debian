@@ -19,29 +19,36 @@ deb_properties_parse(char *str)
     int propval_len = 0;
 
     int lookin_for_propname = 1;
+	int skip_line = 0;
 
     char *prop_name = NULL;
     char *prop_val = NULL;
 
-    for(int index = 0; index < str_len; index++) {
-        char token = str[index];
-        char next_token = '\0';
-        char prev_token = '\0';
+	for (int index = 0; index < str_len; index++) {
+		char token = str[index];
+		char next_token = '\0';
+		char prev_token = '\0';
 
-        int is_end = (str_len - 1) == index;
-        int is_start = index == 0;
+		int is_end = (str_len - 1) == index;
+		int is_start = index == 0;
 
-        if(!is_end) {
-            next_token = str[index + 1];
-        }
+		if (!is_end) {
+			next_token = str[index + 1];
+		}
 
-        if(!is_start) {
-            prev_token = str[index - 1];
-        }
+		if (!is_start) {
+			prev_token = str[index - 1];
+		}
 
-        if(token == '#' && prev_token == '\n') {
-            /* ignore commented lines */
+        /* stop ignoreing if we've reached the end of a line */
+		if (skip_line && token != '\n') {
+            skip_line = 0;
+			continue;
+		}
 
+        if(token == '#') {
+            /* start ignoring the rest of the line */
+			skip_line = 1;
         } else if(token == ' ' && lookin_for_propname) {
             /* error, property names may not contain spaces */
 
